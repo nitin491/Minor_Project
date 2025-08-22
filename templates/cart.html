@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Cart</h2>
+{% if items %}
+<table>
+    <tr style="background:#e8f9e6"><th>Crop</th><th>Qty</th><th>Price/Unit</th><th>Total</th><th>Update</th></tr>
+    {% for item in items %}
+    <tr>
+      <td>{{ item.crop_name }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('update_cart') }}">
+          <input type="hidden" name="cart_id" value="{{ item.cart_id }}">
+          <input type="hidden" name="crop_id" value="{{ item.crop_id }}">
+          <input type="number"
+                 name="quantity"
+                 min="0"
+                 {% set cart_limit = (item.available_now // 2) if (item.available_now // 2) > 0 else 1 %}
+                 max="{{ cart_limit }}"
+                 value="{{ item.quantity }}"
+                 style="width:50px;"
+                 required
+                 class="qty-input"
+                 data-limit="{{ cart_limit }}">
+          <input type="submit" value="Update">
+        </form>
+      </td>
+      <td>₹{{ "%.2f"|format(item.price_per_unit) }}</td>
+      <td>₹{{ "%.2f"|format(item.price_per_unit * item.quantity) }}</td>
+      <td>
+        {% if item.quantity > 0 %}
+        <form method="POST" action="{{ url_for('update_cart') }}">
+          <input type="hidden" name="cart_id" value="{{ item.cart_id }}">
+          <input type="hidden" name="crop_id" value="{{ item.crop_id }}">
+          <input type="hidden" name="quantity" value="0">
+          <input type="submit" value="Remove" style="background:#ce2222;font-size:0.95em;">
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p style="font-size:1.15em"><b>Total: ₹{{ "%.2f"|format(total) }}</b></p>
+<a href="{{ url_for('checkout') }}">Proceed To Checkout</a>
+{% else %}
+<p>Your cart is empty.</p>
+<a href="{{ url_for('buy_crops') }}">Browse Crops</a>
+{% endif %}
+<script>
+  document.querySelectorAll('.qty-input').forEach(function(input){
+      input.addEventListener('input', function(){
+          const limit = parseInt(this.dataset.limit);
+          let val = parseInt(this.value);
+          if (val > limit) {
+              alert("Not allowed to order more than " + limit + " (50% of available stock).");
+              this.value = limit;
+          }
+      });
+  });
+</script>
+{% endblock %}

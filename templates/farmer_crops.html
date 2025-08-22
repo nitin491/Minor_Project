@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Crops</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .form-group { margin-bottom: 15px; }
+        .search-bar { display: flex; justify-content: right; margin-bottom: 18px; }
+        .search-bar input { padding: 7px 14px; border: 1.3px solid #c5ecc2; border-radius: 6px; font-size: 1rem; width: 250px; margin-right: 10px;}
+        .message { color: #308a62; text-align: center; font-weight: 700; margin-bottom: 18px;}
+        .action-btn.delete { background: #e46464; }
+        .action-btn.edit { background: #f0ab1d; }
+        .action-btn.add { background: #56c89b; float: right;}
+    </style>
+    <script>
+    function confirmDelete(form) {
+        if(confirm("Are you sure you want to delete this crop?")) {
+            return true;
+        }
+        return false;
+    }
+    function filterTable() {
+        let input = document.getElementById('searchInput');
+        let filter = input.value.toLowerCase();
+        let table = document.getElementById('cropsTable');
+        let trs = table.getElementsByTagName('tr');
+        for(let i=1;i<trs.length;i++) {
+            let tds = trs[i].getElementsByTagName('td');
+            let show = false;
+            for(let j=0;j<tds.length-1; j++) {
+                if(tds[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                    show = true; break;
+                }
+            }
+            trs[i].style.display = show ? '' : 'none';
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <span class="logo">AgriSetu</span>
+        <nav>
+            <a href="/farmer_dashboard" class="active">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </div>
+    <div class="container">
+        <h1>My Crops</h1>
+        <div class="top-actions">
+            <a href="{{ url_for('add_crop') }}" class="action-btn add">+ Add New Crop</a>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search crops...">
+        </div>
+        <div class="message">
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+        </div>
+        <div class="table-container">
+            {% if crops %}
+            <table id="cropsTable">
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>Price/Unit</th>
+                    <th>Sowing Date</th>
+                    <th>Harvest Date</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                {% for crop in crops %}
+                <tr>
+                    <td>{{ crop['crop_name'] }}</td>
+                    <td>{{ crop['crop_type'] }}</td>
+                    <td>{{ crop['quantity'] }}</td>
+                    <td>{{ crop['price_per_unit'] }}</td>
+                    <td>{{ crop['sowing_date'] }}</td>
+                    <td>{{ crop['harvest_date'] }}</td>
+                    <td>{{ crop['description'] }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_crop', crop_id=crop['crop_id']) }}" class="action-btn edit">Edit</a>
+                        <form action="{{ url_for('delete_crop', crop_id=crop['crop_id']) }}" method="post" style="display:inline;" onsubmit="return confirmDelete(this)">
+                            <button type="submit" class="action-btn delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+                <div class="no-data">You have not added any crops yet.</div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

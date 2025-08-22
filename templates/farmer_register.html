@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmer Registration | AgriSetu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  
+    <nav class="navbar">
+        <a class="logo" href="/">
+            <img src="{{ url_for('static', filename='img/farm_logo.png') }}" alt="AgriLogo" />
+            <span>AgriSetu</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/farmer_login">Farmer Login</a></li>
+            <li><a href="/customer_login">Customer Login</a></li>
+            <li><a href="/government_login">Government Login</a></li>
+        </ul>
+    </nav>
+    <section class="login-section">
+        <form class="login-form" method="post" action="/farmer_register">
+            <h2>👩‍🌾 Farmer Registration</h2>
+            <input type="text" name="full_name" placeholder="Full Name" required />
+            <input type="text" name="username" placeholder="Username" required />
+            <input type="email" name="email" placeholder="E-mail" required />
+            <input type="text" name="mobile" placeholder="Mobile Number" required pattern="[0-9+ ]{8,15}" title="Valid mobile number" />
+            <input type="text" name="address" placeholder="Address" required />
+            <input type="password" name="password" placeholder="Create Password" required />
+            <button class="btn" type="submit">Register</button>
+            <p class="login-switch">
+                Already registered? <a href="/farmer_login">Log in here</a>
+            </p>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                  {% for message in messages %}
+                    <li style="color: #ff3333">{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </form>
+    </section>
+</body>
+</html>

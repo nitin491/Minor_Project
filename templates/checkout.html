@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Checkout</h2>
+{% if items %}
+<ul>
+  {% for it in items %}
+    <li>{{ it.crop_name }} x {{ it.quantity }} at ₹{{ "%.2f"|format(it.price_per_unit) }} = ₹{{ "%.2f"|format(it.price_per_unit * it.quantity) }}</li>
+  {% endfor %}
+</ul>
+<p style="margin-top:15px">
+  <b>Total: ₹{{ "%.2f"|format(total) }}</b>
+</p>
+<form method="POST">
+  <input type="submit" value="Pay & Place Order">
+</form>
+{% else %}
+<p>No items to checkout.</p>
+<a href="{{ url_for('buy_crops') }}">Back to Crops</a>
+{% endif %}
+{% endblock %}

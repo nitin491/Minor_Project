@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Buy Crops</h2>
+<div>
+  {% for crop in crops %}
+    <div class="crop-card">
+      <h3>{{ crop.crop_name }}</h3>
+      <p>
+        {% if crop.total_stock > 0 %}
+          <b>Available: {{ crop.total_stock }}</b><br>
+          <span style="color:#555">From ₹{{ "%.2f"|format(crop.min_price) }}</span><br><br>
+          <form method="POST" action="{{ url_for('add_to_cart') }}" class="cart-form">
+            <input type="hidden" name="crop_name" value="{{ crop.crop_name }}">
+            {# Calculate 50% (floor), always minimum 1 allowed if available #}
+            {% set cart_limit = (crop.total_stock // 2) if (crop.total_stock // 2) > 0 else 1 %}
+            <input type="number" 
+                   min="1" 
+                   max="{{ cart_limit }}" 
+                   name="quantity" 
+                   required 
+                   placeholder="Qty"
+                   class="qty-input"
+                   data-limit="{{ cart_limit }}"
+            >
+            <input type="submit" value="Add to Cart">
+          </form>
+        {% else %}
+          <span class="not-available">Not Available</span>
+        {% endif %}
+      </p>
+    </div>
+  {% endfor %}
+  <script>
+    document.querySelectorAll('.qty-input').forEach(function(input){
+        input.addEventListener('input', function(){
+            const limit = parseInt(this.dataset.limit);
+            let val = parseInt(this.value);
+            if (val > limit) {
+                alert("Not allowed to order more than " + limit + " (50% of available stock).");
+                this.value = limit;
+            }
+        });
+    });
+    </script>
+</div>
+
+<div style="margin-top:22px">
+  <a href="{{ url_for('cart') }}">🛒 Go to Cart</a>
+</div>
+{% endblock %}

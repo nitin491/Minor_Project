@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Crop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .crop-form { max-width: 580px; margin: 32px auto;}
+        .form-group label {font-weight:700; color:#36995d; margin-bottom:3px;display:block;}
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 10px; border: 1.7px solid #b7ead3; border-radius:7px; font-size: 1rem; background: #f5fbf7;
+            margin-bottom: 6px;
+        }
+        .form-group input:invalid, .form-group textarea:invalid {  border-color: #e66a6a; }
+        .form-group .error { color: #e66a6a; font-size:0.96rem; }
+    </style>
+    <script>
+    function validateForm() {
+        let name = document.forms["cropForm"]["crop_name"].value;
+        let quantity = document.forms["cropForm"]["quantity"].value;
+        let price = document.forms["cropForm"]["price_per_unit"].value;
+        let sow = document.forms["cropForm"]["sowing_date"].value;
+        let harv = document.forms["cropForm"]["harvest_date"].value;
+        let ok = true;
+        let errs = [];
+
+        if(name.trim() === "") { ok = false; errs.push("Crop name required."); }
+        if(Number(quantity) <=0) { ok = false; errs.push("Quantity should be greater than 0."); }
+        if(Number(price) <=0) { ok = false; errs.push("Price must be greater than 0."); }
+        if(sow === "" || harv === "") { ok = false; errs.push("Select both dates."); }
+        if(!!sow && !!harv && sow > harv) { ok=false; errs.push("Sowing date cannot be after harvest date."); }
+        let errBox = document.getElementById('errMsg');
+        errBox.innerHTML = errs.join("<br>");
+        return ok;
+    }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <span class="logo">AgriSetu</span>
+        <nav>
+            <a href="/farmer_dashboard" class="active">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </div>
+    <div class="container crop-form">
+        <h1>Edit Crop</h1>
+        <form method="post" name="cropForm" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label>Crop Name</label>
+                <input type="text" name="crop_name" value="{{ crop['crop_name'] }}" required>
+            </div>
+            <div class="form-group">
+                <label>Crop Type</label>
+                <select name="crop_type" required>
+                    <option value="">Select Type</option>
+                    <option value="Cereal" {% if crop['crop_type'] == 'Cereal' %}selected{% endif %}>Cereal</option>
+                    <option value="Pulse" {% if crop['crop_type'] == 'Pulse' %}selected{% endif %}>Pulse</option>
+                    <option value="Oilseed" {% if crop['crop_type'] == 'Oilseed' %}selected{% endif %}>Oilseed</option>
+                    <option value="Vegetable" {% if crop['crop_type'] == 'Vegetable' %}selected{% endif %}>Vegetable</option>
+                    <option value="Fruit" {% if crop['crop_type'] == 'Fruit' %}selected{% endif %}>Fruit</option>
+                    <option value="Fiber" {% if crop['crop_type'] == 'Fiber' %}selected{% endif %}>Fiber</option>
+                    <option value="Other" {% if crop['crop_type'] == 'Other' %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Quantity (kg)</label>
+                <input type="number" name="quantity" min="1" value="{{ crop['quantity'] }}" required>
+            </div>
+            <div class="form-group">
+                <label>Price per Unit (₹)</label>
+                <input type="number" name="price_per_unit" min="1" step="0.01" value="{{ crop['price_per_unit'] }}" required>
+            </div>
+            <div class="form-group">
+                <label>Sowing Date</label>
+                <input type="date" name="sowing_date" value="{{ crop['sowing_date'] }}" required>
+            </div>
+            <div class="form-group">
+                <label>Harvest Date</label>
+                <input type="date" name="harvest_date" value="{{ crop['harvest_date'] }}" required>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" rows="2">{{ crop['description'] }}</textarea>
+            </div>
+            <div id="errMsg" class="form-group error"></div>
+            <button type="submit" class="action-btn edit">Update Crop</button>
+            <a href="{{ url_for('farmer_crops') }}" class="action-btn" style="background:#888;">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

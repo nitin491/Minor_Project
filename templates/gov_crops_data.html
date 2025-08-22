@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+    <title>Crops Data | Agriculture Gov Panel</title>
+    <style>
+        body {
+            background-color: #f0fdf0;
+            font-family: Verdana, Arial, sans-serif;
+            margin: 0; padding: 0;
+        }
+        .gov-header {
+            background: linear-gradient(90deg, #67d084 0%, #5fd6a1 100%);
+            padding: 36px 0 28px 0;
+            display: flex; align-items: center; justify-content: space-between; border-radius: 16px 16px 0 0;
+        }
+        .portal-title {
+            font-weight: 900; font-size: 2.6em; color: #fff; margin-left: 48px; letter-spacing: 1px;
+        }
+        .menu-links { margin-right: 58px; display: flex; align-items: center;}
+        .menu-links a { font-weight: bold; color: #fff; font-size: 1.2em; margin-right: 33px; text-decoration: none;}
+        .menu-links a.active, .menu-links a:hover { border-bottom: 3px solid #fff;}
+        .container-data { max-width: 1100px; margin: 40px auto 30px auto; background: #fff; border-radius: 18px; box-shadow: 0 0 16px #d9edc2; padding: 2em;}
+        .table-crop { background: #fcfff6; width: 100%; border-radius:9px; margin-bottom: 25px; }
+        .table-crop th, .table-crop td { padding: 10px 12px; text-align: center;}
+        .table-crop th { background:#e8f9e6; }
+        h2 { margin:18px 0 13px 0; color:#238743;}
+        .totals-table { margin-top:38px; background:#f5fff5; border-radius:7px;}
+    </style>
+</head>
+<body>
+    <div class="gov-header">
+        <div class="portal-title">AgriSetu</div>
+        <div class="menu-links">
+            <a href="{{ url_for('government_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}" style="margin-right:0;">Logout</a>
+        </div>
+    </div>
+
+    <div class="container-data">
+        <h2>All Crops Data</h2>
+        <table class="table-crop">
+            <tr>
+                <th>Farmer</th>
+                <th>Crop Name</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Price/Unit</th>
+                <th>Sowing Date</th>
+                <th>Harvest Date</th>
+                <th>Description</th>
+                <th>Created</th>
+            </tr>
+            {% for crop in all_crops %}
+            <tr>
+                <td>{{ crop.farmer_name }}</td>
+                <td>{{ crop.crop_name }}</td>
+                <td>{{ crop.crop_type or '&mdash;' }}</td>
+                <td>{{ crop.quantity }}</td>
+                <td>₹{{ "%.2f"|format(crop.price_per_unit) }}</td>
+                <td>{{ crop.sowing_date or '&mdash;' }}</td>
+                <td>{{ crop.harvest_date or '&mdash;' }}</td>
+                <td>{{ crop.description or '&mdash;' }}</td>
+                <td>{{ crop.created_at.strftime('%Y-%m-%d') }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h3 style="margin-top: 2.6em; color:#176c45;">Total Stock by Crop</h3>
+        <table class="table-crop totals-table">
+            <tr>
+                <th>Crop Name</th>
+                <th>Total Available Quantity</th>
+            </tr>
+            {% for crop_name, total in crop_totals.items() %}
+            <tr>
+                <td>{{ crop_name }}</td>
+                <td>{{ total }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

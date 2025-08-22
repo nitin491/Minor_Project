@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Government Dashboard | Agriculture Portal</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+      <a class="logo" href="/"><span>AgriSetu</span></a>
+      <ul class="nav-links">
+          <li><a href="/government_dashboard" class="active">Dashboard</a></li>
+          <li><a href="/government_login">Logout</a></li>
+      </ul>
+  </nav>
+  <main class="dashboard">
+      <h2>Welcome, Government Official!</h2>
+      <div class="dashboard-cards">
+        <a class="dashboard-card" href="/gov/crops_data">
+          <span>🌱</span>
+          <div>Crops Data</div>
+        </a>
+        <a class="dashboard-card" href="/gov/transactions_history">
+          <span>💳</span>
+          <div>Transactions History</div>
+        </a>
+        <a class="dashboard-card" href="/farmers_details">
+          <span>👨‍🌾</span>
+          <div>Farmers Details</div>
+        </a>
+        <a class="dashboard-card" href="/customer_details">
+          <span>🧑‍🤝‍🧑</span>
+          <div>Customers Details</div>
+        </a>
+      </div>
+  </main>
+</body>
+</html>

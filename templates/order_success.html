@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Order Placed Successfully!</h2>
+<p>Your order has been placed.<br>
+Check your email for the order receipt.</p>
+<p>
+  <a href="{{ url_for('buy_crops') }}">Buy More Crops</a> <span style="margin:0 12px;">|</span>
+  <a href="/customer_dashboard">Go to Dashboard</a>
+</p>
+{% endblock %}

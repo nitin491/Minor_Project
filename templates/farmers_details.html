@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farmer Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <span class="logo">AgriSetu</span>
+        <nav>
+            <a href="/government_dashboard" class="active">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </div>
+    <div class="container">
+        <h1>Farmer Details</h1>
+        <div class="top-actions">
+            <a href="/customer_details" class="action-btn">View Customer Details</a>
+        </div>
+        <div class="table-container">
+            {% if farmers %}
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                </tr>
+                {% for farmer in farmers %}
+                <tr>
+                    <td>{{ farmer['id'] }}</td>
+                    <td>{{ farmer['full_name'] }}</td>
+                    <td>{{ farmer['email'] }}</td>
+                    <td>{{ farmer['mobile'] }}</td>
+                    <td>{{ farmer['address'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <div class="no-data">No farmers found.</div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Farmer Dashboard | Agriculture Portal</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  
+  <nav class="navbar">
+      <a class="logo" href="/"><span>AgriSetu</span></a>
+      <ul class="nav-links">
+          <li><a href="/farmer_dashboard" class="active">Dashboard</a></li>
+          <li><a href="/farmer_login">Logout</a></li>
+      </ul>
+  </nav>
+  <main class="dashboard">
+      <h2>Welcome, Farmer!</h2>
+      <div class="dashboard-cards">
+        <a class="dashboard-card" href="/farmer_profile">
+          <span>👤</span>
+          <div>My Profile</div>
+        </a>
+        <a class="dashboard-card" href="/crop_predictor">
+          <span>🔮</span>
+          <div>Crop Predictor</div>
+        </a>
+        <a class="dashboard-card" href="/farmer_crops">
+          <span>🌾</span>
+          <div>Crops Display</div>
+        </a>
+        <a class="dashboard-card" href="/farmer/trade_history">
+          <span>📜</span>
+          <div>Trade History</div>
+        </a>
+      </div>
+  </main>
+</body>
+</html>

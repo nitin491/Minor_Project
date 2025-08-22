@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmer Login | Agriculture Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  
+    <nav class="navbar">
+        <a class="logo" href="/">
+            <img src="{{ url_for('static', filename='img/farm_logo.png') }}" alt="AgriLogo" />
+            <span>AgriSetu</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/farmer_login" class="active">Farmer Login</a></li>
+            <li><a href="/customer_login">Customer Login</a></li>
+            <li><a href="/government_login">Government Login</a></li>
+        </ul>
+    </nav>
+    <section class="login-section">
+        <form class="login-form" method="post" action="/farmer_login">
+            <h2>👩‍🌾 Farmer Login</h2>
+            <input type="text" name="username" placeholder="E-mail or Username" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <button class="btn" type="submit">Login</button>
+            <p class="login-switch">Not registered? <a href="/farmer_register">Sign up here</a></p>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                  {% for message in messages %}
+                    <li style="color: #ff3333">{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </form>
+    </section>
+</body>
+</html>

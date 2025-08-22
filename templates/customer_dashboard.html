@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Customer Dashboard | AgriSetu</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+      <a class="logo" href="/"><span>AgriSetu</span></a>
+      <ul class="nav-links">
+          <li><a href="/customer_dashboard" class="active">Dashboard</a></li>
+          <li><a href="/customer_login">Logout</a></li>
+      </ul>
+  </nav>
+  <main class="dashboard">
+      <h2>Welcome, Customer!</h2>
+      <div class="dashboard-cards">
+        <a class="dashboard-card" href="/customer_profile">
+          <span>👤</span>
+          <div>My Profile</div>
+        </a>
+        <a class="dashboard-card" href="/buy_crops">
+          <span>🛒</span>
+          <div>Buy Crops</div>
+        </a>
+      </div>
+  </main>
+</body>
+</html>

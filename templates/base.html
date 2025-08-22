@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <title>AgriSetu</title>
+    <style>
+        body {
+            background-color: #f0fdf0;
+            font-family: Verdana, Arial, sans-serif;
+            color: #253523;
+            margin: 0;
+            padding: 0;
+        }
+        .container { max-width:900px; margin:30px auto; background:#fff; border-radius:18px; box-shadow:0 0 16px #d9edc2; padding:2em; }
+        .crop-card { background:#e5ffee; border-radius:12px; box-shadow:0 2px 7px #97df9725; padding:1.2em; margin:1em; width:220px; display:inline-block; vertical-align:top; text-align:center;}
+        .not-available { color:#c00; font-weight:bold; }
+        table { background: #fcfff6; width: 100%; border-radius:9px; margin-bottom: 25px; }
+        th, td { padding: 10px; }
+        button, input[type="submit"] { background: #34a853; color: #fff; padding: 6px 17px; border:none; border-radius:8px; cursor:pointer; transition:0.2s;}
+        button:hover, input[type="submit"]:hover { background: #248a3d;}
+        input[type="number"] { width:60px; border:1px solid #aaa; border-radius:5px; padding:3px; margin:0 3px;}
+        .flash { background:#e6ffe6; margin:0 0 16px 0; padding:10px 17px; border:1px solid #97df97; border-radius:7px;}
+        a { color:#238743; text-decoration:none;}
+        a:hover { text-decoration:underline;}
+    </style>
+</head>
+<body>
+    <div style="
+    background: linear-gradient(90deg, #67d084 0%, #5fd6a1 100%);
+    padding: 36px 0 28px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 16px 16px 0 0;
+">
+    <div style="font-weight: 900; font-size: 2.8em; color: #fff; margin-left: 48px; letter-spacing: 1px; font-family: Verdana, Arial, sans-serif;">
+        AgriSetu
+    </div>
+    <div style="margin-right: 58px; display: flex; align-items: center;">
+        <a href="{{ url_for('customer_dashboard') }}"
+            style="
+                font-weight: bold;
+                color: #fff;
+                font-size: 1.2em;
+                margin-right: 33px;
+                text-decoration: none;
+                border-bottom: 3px solid #fff;
+                padding-bottom: 2px;
+                ">
+            Dashboard
+        </a>
+        <a href="{{ url_for('logout') }}"
+            style="
+                font-weight: bold;
+                color: #fff;
+                font-size: 1.2em;
+                text-decoration: none;
+                ">
+            Logout
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

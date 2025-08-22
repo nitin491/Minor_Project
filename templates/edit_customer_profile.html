@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit My Profile | Customer</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<nav class="navbar">
+    <a class="logo" href="/"><span>AgriSetu</span></a>
+    <ul class="nav-links">
+        <li><a href="/customer_dashboard">Dashboard</a></li>
+        <li><a href="/customer_profile" class="active">My Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+<main class="dashboard">
+    <h2>Edit My Profile</h2>
+    <form method="post" enctype="multipart/form-data" class="login-form profile-edit-form">
+      <div style="text-align:center">
+          {% if user.profile_photo %}
+              <img src="{{ url_for('static', filename='profile_photos/' + user.profile_photo) }}"
+                   alt="Profile Photo"
+                   style="width:80px;height:80px;border-radius:50%;object-fit:cover;box-shadow:0 0 6px #aaa;">
+          {% else %}
+              <img src="{{ url_for('static', filename='default_user.jpg') }}"
+                   alt="Profile Photo"
+                   style="width:80px;height:80px;border-radius:50%;object-fit:cover;box-shadow:0 0 6px #aaa;">
+          {% endif %}
+      </div>
+      <label for="profile_photo" style="margin:1em 0 0.1em 0;">Change Profile Photo</label>
+      <input type="file" name="profile_photo" id="profile_photo" accept=".jpg,.jpeg,.png,.gif">
+      <input type="text" name="full_name" value="{{ user.full_name }}" placeholder="Full Name" required pattern="^[A-Za-z ]+$" title="Letters and spaces only">
+      <input type="email" name="email" value="{{ user.email }}" placeholder="Email" required>
+      <input type="text" name="mobile" value="{{ user.mobile }}" placeholder="Mobile Number" required pattern="^[0-9+ ]{8,15}$" title="Valid mobile number">
+      <input type="text" name="address" value="{{ user.address }}" placeholder="Address" required>
+      <button class="btn btn-secondary" type="submit">Update Profile</button>
+      <p class="login-switch">
+          <a href="{{ url_for('customer_profile') }}">Back to Profile</a>
+      </p>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+  </form>
+</main>
+</body>
+</html>
