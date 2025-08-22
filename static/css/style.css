@@ -1,0 +1,624 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: #f7faf5;
+    color: #244122;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    background: linear-gradient(to right, #72c96c, #45b649);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(72, 160, 120, 0.10);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.6em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 38px;
+    height: 38px;
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    gap: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+}
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: #caf6c1;
+    border-bottom: 2px solid #caf6c1;
+}
+
+/* Hero/main section if needed */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    background: linear-gradient(135deg, #f7faf5 60%, #d3fcbf 100%);
+    padding: 3em 0;
+}
+
+.hero-content {
+    max-width: 600px;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    color: #217d3c;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+    color: #244122;
+    opacity: 0.85;
+}
+
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+.btn,
+.btn-secondary,
+.btn-outline {
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.08em;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.88em 1.7em;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    box-shadow: 0 1px 6px rgba(100, 180, 100, 0.07);
+    margin: 0.3em 0;
+    display: inline-block;
+}
+
+.btn {             /* Farmer button */
+    background: linear-gradient(90deg, #61d64e, #44b94c);
+    color: #fff;
+}
+.btn:hover {
+    background: linear-gradient(90deg, #36ad32, #218838);
+    color: #f5fff8;
+}
+
+.btn-secondary {   /* Customer button */
+    background: linear-gradient(90deg, #f7ffe6, #defacd);
+    color: #355217;
+    border: 1.5px solid #61d64e;
+}
+.btn-secondary:hover {
+    background: #defad6;
+    color: #218838;
+}
+
+.btn-outline {     /* Government button */
+    background: transparent;
+    color: #1d8f35;
+    border: 2px solid #61d64e;
+}
+.btn-outline:hover {
+    background: #bcfecb;
+    color: #236b2d;
+}
+
+/* Registration & Login Form Styling */
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    background: linear-gradient(135deg, #ffffff 60%, #e1ffe5 100%);
+    padding: 2em 0;
+}
+
+.login-form {
+    background: #ffffffee;
+    padding: 2.5em 2em;
+    border-radius: 15px;
+    box-shadow: 0 6px 28px rgba(86,158,83,0.11);
+    max-width: 360px;
+    width: 93vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 1em;
+    border: 1.2px solid #d4efd5;
+}
+
+.login-form h2 {
+    margin-bottom: 0.8em;
+    font-size: 1.3em;
+    color: #399f4a;
+    text-align: center;
+}
+
+.login-form input {
+    padding: 0.85em 1.05em;
+    border: 1px solid #a4d8ad;
+    border-radius: 8px;
+    font-size: 1.05em;
+    background: #f6fff5;
+    margin-bottom: 0.23em;
+    transition: border 0.2s;
+    outline: none;
+}
+.login-form input:focus {
+    border: 1.6px solid #44b94c;
+    background: #ecffe2;
+}
+
+.login-form button {
+    margin-top: 0.4em;
+}
+
+.login-switch {
+    text-align: center;
+    font-size: 1em;
+    color: #888;
+}
+
+.login-switch a {
+    color: #1bae46;
+    text-decoration: none;
+    font-weight: 500;
+}
+.login-switch a:hover {
+    text-decoration: underline;
+}
+
+/* Flash/alert messages */
+.login-form ul {
+    padding: 0.5em 1.5em;
+    margin: 0.3em 0 0 0;
+    list-style-type: none;
+}
+.login-form ul li {
+    color: #e92d3b;
+    font-size: 0.99em;
+    margin-bottom: 0.3em;
+}
+
+/* Responsive Styles */
+@media (max-width: 700px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1em;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 0.7em;
+        width: 100%;
+    }
+    .hero-content h1 {
+        font-size: 1.4em;
+    }
+    .login-section {
+        min-height: 0;
+        padding: 1em 0.4em;
+    }
+    .login-form {
+        padding: 1em 0.7em;
+    }
+}
+.dashboard {
+    max-width: 1050px;
+    margin: 2em auto;
+    padding: 1.5em;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(65,151,91,0.13);
+}
+
+.dashboard h2 {
+    text-align: center;
+    font-size: 2em;
+    color: #319452;
+    margin-bottom: 2em;
+    margin-top: 0;
+}
+
+.dashboard-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+}
+
+.dashboard-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    min-height: 140px;
+    background: linear-gradient(120deg, #e9ffe3 60%, #caf1bf 100%);
+    color: #166747;
+    border-radius: 15px;
+    box-shadow: 0 2px 9px rgba(50,150,70,0.08);
+    text-decoration: none;
+    font-size: 1.15em;
+    font-weight: 500;
+    transition: transform 0.13s, box-shadow 0.16s, background 0.2s;
+    padding: 1.2em 0.4em 0.8em 0.4em;
+    margin-bottom: 1em;
+}
+.dashboard-card span {
+    font-size: 2.5em;
+    margin-bottom: 0.4em;
+}
+.dashboard-card:hover {
+    background: linear-gradient(120deg, #bfffcf 50%, #95d7b1 100%);
+    color: #244122;
+    box-shadow: 0 5px 18px #aef8cc3d;
+    transform: translateY(-6px) scale(1.04);
+}
+
+@media (max-width: 700px) {
+    .dashboard-cards {
+        flex-direction: column;
+        gap: 1em;
+        align-items: center;
+    }
+    .dashboard {
+        padding: 0.5em;
+    }
+    .dashboard-card {
+        width: 93vw;
+        min-height: 95px;
+        font-size: 1em;
+    }
+}
+
+.profile-card {
+    margin: 2em auto;
+    max-width: 400px;
+    background: #fafffa;
+    border-radius: 13px;
+    box-shadow: 0 2px 10px #bffbc83a;
+    padding: 2em;
+    text-align: center;
+}
+
+.profile-card h3 {
+    color: #219150;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+.profile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: flex-start;
+    margin: 1em 0;
+    font-size: 1.08em;
+}
+
+.profile-list strong {
+    min-width: 95px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+/* Farmer Profile Edit Form */
+.profile-edit-form {
+    max-width: 430px;
+    margin: 2em auto 0 auto;
+    padding: 2em 2.2em 1.7em 2.2em;
+    background: #fcfefe;
+    border: 1.3px solid #d6efd8;
+    border-radius: 15px;
+    box-shadow: 0 3px 22px rgba(82,200,129,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+    transition: box-shadow 0.15s;
+    font-size: 1.08em;
+}
+
+.profile-edit-form input[type="text"],
+.profile-edit-form input[type="email"] {
+    padding: 0.9em 1.05em;
+    border: 1.4px solid #b6dfb7;
+    border-radius: 7px;
+    font-size: 1em;
+    background: #f8fff6;
+    transition: border 0.22s, box-shadow 0.17s;
+    margin-bottom: 0.14em;
+}
+.profile-edit-form input[type="text"]:focus,
+.profile-edit-form input[type="email"]:focus {
+    border-color: #46c860;
+    box-shadow: 0 0 4px 0 #a8fdbe89;
+    outline: none;
+    background: #edfff2;
+}
+
+.profile-edit-form button.btn,
+.profile-edit-form .btn-secondary {
+    width: 100%;
+    margin-top: 0.8em;
+}
+
+.profile-edit-form .login-switch {
+    margin-top: -0.5em;
+    color: #787;
+    font-size: 0.98em;
+}
+
+.profile-edit-form a {
+    color: #23a46b;
+    transition: color 0.17s;
+}
+.profile-edit-form a:hover {
+    color: #156b47;
+    text-decoration: underline;
+}
+
+.profile-edit-form ul {
+    margin: 1em auto 0.3em auto;
+    padding-left: 1.1em;
+    color: #d54a22;
+    font-size: 1em;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .profile-edit-form {
+        max-width: 96vw;
+        padding: 1em 0.5em 1em 0.5em;
+    }
+}
+.profile-edit-form input[type="file"] {
+    border: none;
+    padding: 0.5em 0;
+    background: none;
+}
+.profile-edit-form img {
+    margin-bottom: 1em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius:50%;
+    border:2px solid #d6efd8;
+}
+
+/*  */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Nunito", "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(120deg, #f6fdf7 0%, #eafae6 100%);
+    min-height: 100vh;
+}
+
+/* ------- Header Styling ------- */
+.header {
+    background: linear-gradient(90deg, #6fd36f 0%, #56c89b 100%);
+    padding: 28px 30px 22px 30px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 16px rgba(50, 170, 87, 0.11);
+}
+
+.header .logo {
+    font-size: 2.3rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    user-select: none;
+    text-shadow: 0 2px 12px rgba(85, 180, 100, 0.20);
+}
+
+.header nav {
+    display: flex;
+    gap: 38px;
+}
+
+.header nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 6px 0 3px 0;
+    border-bottom: 2.5px solid transparent;
+    transition: border 0.25s;
+}
+
+.header nav a.active,
+.header nav a:hover {
+    border-bottom: 2.5px solid #fff;
+}
+
+/* ------- Container ------- */
+.container {
+    background: #fff;
+    border-radius: 22px;
+    margin: 50px auto 0 auto;
+    padding: 38px 28px;
+    width: 92vw;
+    max-width: 1200px;
+    box-shadow: 0 8px 40px 0 rgba(86, 200, 155, 0.09), 0 2.5px 8px rgba(79,185,157,0.04);
+}
+
+/* ------- Heading ------- */
+h1 {
+    color: #50bc70;
+    font-size: 2.6rem;
+    margin: 0 0 28px 0;
+    text-align: center;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+/* ------- Nav Buttons ------- */
+.top-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 26px;
+}
+
+.action-btn {
+    background: linear-gradient(90deg, #6fd36f 0%, #56c89b 100%);
+    color: #fff !important;
+    border: none;
+    border-radius: 9px;
+    padding: 10px 24px;
+    font-size: 1.07rem;
+    font-weight: 700;
+    box-shadow: 0 2px 14px rgba(111, 211, 111, 0.06);
+    text-decoration: none;
+    margin-left: 16px;
+    transition: background 0.23s, transform 0.13s;
+    outline: none;
+    cursor: pointer;
+}
+
+.action-btn:hover, .action-btn:focus {
+    background: linear-gradient(90deg, #5cc689 0%, #6fd36f 100%);
+    transform: translateY(-2px) scale(1.04) !important;
+    color: #fff;
+}
+
+/* ------- Table Styling ------- */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-radius: 16px;
+    background: linear-gradient(120deg, #eafbe8 0%, #f6fdf7 100%);
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 1.5px 24px #7bd86c10, 0 2px 8px  #5ac69a09;
+    overflow: hidden;
+    margin: auto;
+}
+
+th {
+    background: linear-gradient(90deg, #beeccd 0%, #aaf5bc 100%);
+    color: #178055;
+    padding: 17px 10px;
+    font-weight: 800;
+    font-size: 1.11rem;
+    border-bottom: 3px solid #d4f5cc;
+    text-align: left;
+    letter-spacing: 0.2px;
+    user-select: none;
+}
+
+td {
+    padding: 14px 9px;
+    color: #2d453c;
+    border-bottom: 1.8px solid #e0f7d9;
+    font-size: 1.035rem;
+    font-weight: 500;
+    background: none;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr {
+    transition: background 0.17s;
+}
+
+tr:hover {
+    background: #ecfce9 !important;
+}
+
+@media (max-width: 850px) {
+    .container {
+        padding: 16px 6px;
+        width: 99vw;
+    }
+    th, td {
+        font-size: 0.97rem;
+        padding: 11px 7px;
+    }
+    h1 { font-size: 1.5rem; }
+}
+
+/* ------- Subtle Scrollbar ------- */
+.table-container::-webkit-scrollbar {
+    height: 7px;
+}
+.table-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg,#baeabb 0%,#66c693 100%);
+    border-radius: 7px;
+}
+.table-container::-webkit-scrollbar-track {
+    background: #f9fdfb;
+}
+
+/* ------- Extras ------- */
+.no-data {
+    text-align: center;
+    color: #b3bea7;
+    font-size: 1.15rem;
+    padding: 32px 4px;
+}
+
+@media (max-width: 600px) {
+    .header .logo { font-size: 1.25rem; }
+    th, td { font-size: 0.9rem; }
+}
+
+
+.croplist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .cropcard {
+    background: #e9fbe9;
+    border-radius: 15px;
+    padding: 1.5rem;
+    width: 250px;
+    box-shadow: 0 2px 10px #dbffdb;
+  }
+  .not-available {
+    color: #c00;
+    font-weight: bold;
+  }
